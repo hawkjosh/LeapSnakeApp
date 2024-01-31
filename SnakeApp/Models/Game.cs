@@ -8,7 +8,9 @@
 
         public Game()
         {
-            Snake = new Snake();
+            int userInputSpeed = 1;
+            //Setting default speed
+            Snake = new Snake(userInputSpeed);
             Food = new Food();
             Board = new Board();
         }
