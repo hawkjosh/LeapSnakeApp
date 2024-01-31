@@ -5,14 +5,19 @@
         public Snake Snake { get; private set; }
         public Food Food { get; private set; }
         public Board Board { get; private set; }
+        public int SpeedInput { get; }
 
         public Game()
-        {
-            int userInputSpeed = 1;
+        {            
             //Setting default speed
-            //Snake = new Snake(userInputSpeed);
+            Snake = new Snake(SpeedInput);
             Food = new Food();
             Board = new Board();
+        }
+
+        public Game(int speedInput)
+        {
+            SpeedInput = speedInput;
         }
 
         // Add methods for game logic such as starting, updating state, checking for game over, etc.

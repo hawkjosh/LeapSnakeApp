@@ -20,7 +20,7 @@ namespace SnakeApp.Controllers
             Console.WriteLine("Welcome to the Game of Snake!");
             Console.WriteLine(speedInputQuestion);
             GetUserSpeed();
-            Snake snake = new Snake(speedInput);
+            Game game = new Game(speedInput);
         }
 
         private void GetUserSpeed()
