@@ -1,4 +1,5 @@
 ﻿using SnakeApp.Controllers;
+using SnakeApp.Models;
 
 namespace SnakeApp
 {
@@ -6,8 +7,10 @@ namespace SnakeApp
     {
         static void Main(string[] args)
         {
-            var gm = new GameController();
-            gm.Start();
+            //var gm = new GameController();
+            //gm.Start();
+            var gm = new Game();
+
 
         }
     }
