@@ -7,17 +7,13 @@
         public Board Board { get; private set; }
         public int SpeedInput { get; }
 
-        public Game()
-        {            
-            //Setting default speed
-            Snake = new Snake(SpeedInput);
-            Food = new Food();
-            Board = new Board();
-        }
-
         public Game(int speedInput)
         {
             SpeedInput = speedInput;
+            Snake = new Snake(SpeedInput);
+
+            Food = new Food();
+            Board = new Board();
         }
 
         // Add methods for game logic such as starting, updating state, checking for game over, etc.

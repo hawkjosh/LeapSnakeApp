@@ -28,13 +28,15 @@ namespace SnakeApp.Models
         }
 
         public Coordinate GetCurrentPosition()
-        {
+        {            
             return SnakeCoordinate;
         }
 
         public Snake(int speed)
         {
             SetSnakeSpeed(speed);
+            SnakeCoordinate.X = Console.WindowWidth / 2;
+            SnakeCoordinate.Y = Console.WindowHeight / 2;
         }
 
         private void SetSnakeSpeed(int speed)
