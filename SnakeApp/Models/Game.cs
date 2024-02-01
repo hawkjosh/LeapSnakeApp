@@ -13,6 +13,7 @@
             //Snake = new Snake(userInputSpeed);
             Food = new Food();
             Board = new Board();
+            // FROM JOSH: Need to add board width and height as parameters above for this to work...
         }
 
         // Add methods for game logic such as starting, updating state, checking for game over, etc.
