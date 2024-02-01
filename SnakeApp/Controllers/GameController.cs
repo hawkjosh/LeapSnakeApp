@@ -22,14 +22,14 @@ namespace SnakeApp.Controllers
         {
             // Implement the game loop here: process input, update game state, render view, etc.
             InitGame();
-            
+
             while (true)
             {
-                if(GameState == GameState.InProgress)
+                if (GameState == GameState.InProgress)
                 {
                     StartSnakeGame();
                 }
-                if(GameState == GameState.EndGame)
+                if (GameState == GameState.EndGame)
                 {
                     Console.WriteLine("Game Over!");
                     break;
@@ -40,12 +40,12 @@ namespace SnakeApp.Controllers
 
         private void StartSnakeGame()
         {
-            
-            while(!direction.HasValue && GameState == GameState.InProgress)
+
+            while (!direction.HasValue && GameState == GameState.InProgress)
             {
                 GetDirection();
             }
-            while(GameState == GameState.InProgress)
+            while (GameState == GameState.InProgress)
             {
                 if (Console.WindowWidth != gameWidth || Console.WindowHeight != gameHeight)
                 {
@@ -54,7 +54,8 @@ namespace SnakeApp.Controllers
                     GameState = GameState.EndGame;
                     break;
                 }
-                
+
+                //Update snake position (coordinates) based on user input
                 UpdateSnakePosition(currentPosition);
                 if (!CheckIfPositionIsValid(currentPosition))
                 {
@@ -67,7 +68,7 @@ namespace SnakeApp.Controllers
                 //Save snake's position
                 game.Snake.SnakeQueue.Enqueue(currentPosition);
 
-                
+
                 if (map[currentPosition.X, currentPosition.Y] == Tile.Food)
                 {
                     //If snake eats food successfully, update food position
@@ -75,18 +76,33 @@ namespace SnakeApp.Controllers
                 }
                 else
                 {
-                    
+                    //Update old position so that the snake moves within the console along its path.
+                    UpdateOldPositionOfSnake();
                 }
-                
+
+                if (Console.KeyAvailable)
+                {
+                    GetDirection();
+                }
+                Thread.Sleep(game.Snake.GetSnakeSleepDuration());
             }
+        }
+
+        private void UpdateOldPositionOfSnake()
+        {
+            var oldPosition = game.Snake.SnakeQueue.Dequeue();
+            map[oldPosition.X, oldPosition.Y] = Tile.Empty;
+            Console.SetCursorPosition(oldPosition.X, oldPosition.Y);
+            Console.Write(' ');
         }
 
         private bool CheckIfPositionIsValid(Coordinate currentPosition)
         {
-            if(currentPosition.X < 0 || currentPosition.Y < 0 ||
+            if (currentPosition.X < 0 || currentPosition.Y < 0 ||
                 currentPosition.X >= game.Board.Coordinates.X ||
                 currentPosition.Y >= game.Board.Coordinates.Y ||
-                map[currentPosition.X,currentPosition.Y] is Tile.Snake) {
+                map[currentPosition.X, currentPosition.Y] is Tile.Snake)
+            {
                 Console.Clear();
                 Console.WriteLine($"Game Over!! Your score is {game.Snake.SnakeLength}");
                 GameState = GameState.EndGame;
@@ -107,7 +123,7 @@ namespace SnakeApp.Controllers
                     currentPosition.Y--; break;
                 case Direction.Down:
                     currentPosition.Y++; break;
-            }            
+            }
         }
 
         private void GetDirection()
@@ -139,9 +155,9 @@ namespace SnakeApp.Controllers
             Console.WriteLine(speedInputQuestion);
             GetUserSpeed();
 
-            //Gmae model constructs the Snake, Food and Board objects
+            //Game model constructs the Snake, Food and Board objects
             game = new Game(speedInput);
-            
+
             //Get Console Dimensions
             UpdateConsoleDimensions();
 
@@ -154,11 +170,11 @@ namespace SnakeApp.Controllers
             //Save the initial position of snake and set its tile to snake
             game.Snake.SnakeQueue.Enqueue(game.Snake.SnakeCoordinate);
             map[game.Snake.SnakeCoordinate.X, game.Snake.SnakeCoordinate.Y] = Tile.Snake;
-            
+
             //Display the starting position of snake
             Console.SetCursorPosition(currentPosition.X, currentPosition.Y);
             Console.Write('*');
-                        
+
             GameState = GameState.InProgress;
         }
 
@@ -177,7 +193,8 @@ namespace SnakeApp.Controllers
                 {
                     speedInput = 1;
                     break;
-                } else
+                }
+                else
                 {
                     Console.WriteLine("Invalid input, please try again...");
                     Console.Write(speedInputQuestion);

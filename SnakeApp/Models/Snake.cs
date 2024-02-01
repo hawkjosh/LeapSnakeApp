@@ -7,6 +7,9 @@ namespace SnakeApp.Models
         // TODO: Add properties and methods to manage the snake
         private Speed snakespeed;
         private Direction snakeDirection;
+       
+        
+
         public Speed SnakeSpeed
         {
             get { return snakespeed; }
@@ -51,5 +54,15 @@ namespace SnakeApp.Models
                     SnakeSpeed = Speed.Fast; break;
             }
         }
+
+        public TimeSpan GetSnakeSleepDuration()
+        {
+            int[] snakeVelocityConversionArray = [200, 140, 100];
+            var velocity = snakeVelocityConversionArray[(int)SnakeSpeed - 1];
+            TimeSpan timeToSleep = TimeSpan.FromMilliseconds(velocity);
+            return timeToSleep;
+        }
+
+
     }
 }
