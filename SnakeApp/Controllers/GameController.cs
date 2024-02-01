@@ -14,6 +14,7 @@ namespace SnakeApp.Controllers
         private int gameWidth;
         private int gameHeight;
         private Coordinate? foodCoordinate;
+        private Coordinate? currentPosition;
         public GameState GameState { get; private set; }
         Tile[,] map;
         string speedInputQuestion = "Please enter your desired speed (1-->Low, 2-->Medium, 3-->High";
@@ -53,7 +54,7 @@ namespace SnakeApp.Controllers
                     GameState = GameState.EndGame;
                     break;
                 }
-                var currentPosition = game.Snake.GetCurrentPosition();
+                
                 UpdateSnakePosition(currentPosition);
                 if (!CheckIfPositionIsValid(currentPosition))
                 {
@@ -74,7 +75,7 @@ namespace SnakeApp.Controllers
                 }
                 else
                 {
-
+                    
                 }
                 
             }
@@ -137,9 +138,27 @@ namespace SnakeApp.Controllers
             GameState = GameState.WaitingForUserInput;
             Console.WriteLine(speedInputQuestion);
             GetUserSpeed();
-            foodCoordinate = game.Food.GetCurrentPosition();
-            game = new Game(speedInput); //Gmae model constructs the Snake, Food and Board objects
+
+            //Gmae model constructs the Snake, Food and Board objects
+            game = new Game(speedInput);
+            
+            //Get Console Dimensions
             UpdateConsoleDimensions();
+
+            //Get initial position of snake
+            currentPosition = game.Snake.GetCurrentPosition();
+
+            //Get the initial position of food
+            foodCoordinate = game.Food.GetCurrentPosition();
+
+            //Save the initial position of snake and set its tile to snake
+            game.Snake.SnakeQueue.Enqueue(game.Snake.SnakeCoordinate);
+            map[game.Snake.SnakeCoordinate.X, game.Snake.SnakeCoordinate.Y] = Tile.Snake;
+            
+            //Display the starting position of snake
+            Console.SetCursorPosition(currentPosition.X, currentPosition.Y);
+            Console.Write('*');
+                        
             GameState = GameState.InProgress;
         }
 
