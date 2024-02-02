@@ -46,11 +46,11 @@ namespace SnakeApp.Models
         {
             switch(speed)
             {
-                case 0:
-                    SnakeSpeed = Speed.Slow; break;
                 case 1:
-                    SnakeSpeed = Speed.Medium; break;
+                    SnakeSpeed = Speed.Slow; break;
                 case 2:
+                    SnakeSpeed = Speed.Medium; break;
+                case 3:
                     SnakeSpeed = Speed.Fast; break;
             }
         }
