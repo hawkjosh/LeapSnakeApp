@@ -12,8 +12,8 @@
             SpeedInput = speedInput;
             Snake = new Snake(SpeedInput);
 
-            Food = new Food();
             Board = new Board();
+            Food = new Food(Board);
         }
 
         // Add methods for game logic such as starting, updating state, checking for game over, etc.

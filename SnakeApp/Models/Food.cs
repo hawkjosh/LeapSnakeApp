@@ -5,12 +5,10 @@ namespace SnakeApp.Models
     public class Food : ICurrentPosition  // This manages the position and type of food items on the board
     {
         // TODO: Add properties and methods
-        private FoodType foodType;
         private Coordinate foodCoordinate;
         private Board board;
 
-        
-        public FoodType FoodType { get { return foodType; } }   
+
         public Coordinate GetCurrentPosition()
         {
             return foodCoordinate;
@@ -40,21 +38,22 @@ namespace SnakeApp.Models
 
 
 
-        private void CalculateNexFoodPosition()
+        private Coordinate CalculateNexFoodPosition()
         {
-            var emptyPositions = board.GetAllEmptyPositions();
+            var emptyPositions = GetAllEmptyPositions();
             int index = Random.Shared.Next(emptyPositions.Count);
             (int x, int y) = emptyPositions[index];
             foodCoordinate = new Coordinate(x, y);
-            
+            return foodCoordinate;
+
 
         }
 
         public Food(Board board) 
         {
             this.board = board;
-            CalculateNexFoodPosition();
-
+            
+            foodCoordinate = CalculateNexFoodPosition();
 
         }
 

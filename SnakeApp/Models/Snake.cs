@@ -38,8 +38,8 @@ namespace SnakeApp.Models
         public Snake(int speed)
         {
             SetSnakeSpeed(speed);
-            SnakeCoordinate.X = Console.WindowWidth / 2;
-            SnakeCoordinate.Y = Console.WindowHeight / 2;
+            SnakeCoordinate = new Coordinate(Console.WindowWidth / 2, Console.WindowHeight / 2);
+            SnakeQueue = new Queue<Coordinate>();
         }
 
         private void SetSnakeSpeed(int speed)
