@@ -2,9 +2,9 @@
 {
     public class Board  // This deals with the dimensions and boundaries of the game area
     {
-        private int width;
-        private int height;
-        private Tile[,] map;
+        public int width;
+        public int height;
+        public Tile[,] map;
 
         public Board()
         {
@@ -33,13 +33,6 @@
         {
             map[x, y] = Tile.Food;
         }
-        public void PrintBoard(Food food)
-        {
-
-            Console.Clear();
-            Console.SetCursorPosition(food.GetCurrentPosition().X, food.GetCurrentPosition().Y);
-            Console.Write(food.FoodType);
-            // Add logic to print empty board, food in board and snake in board.
-        }
+        
     }
 }

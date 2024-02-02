@@ -6,7 +6,9 @@ namespace SnakeApp.Models
     {
         // TODO: Add properties and methods
         private FoodType foodType;
-        private Coordinate foodCoordinate; 
+        private Coordinate foodCoordinate;
+        private Board board;
+
         
         public FoodType FoodType { get { return foodType; } }   
         public Coordinate GetCurrentPosition()
@@ -14,22 +16,46 @@ namespace SnakeApp.Models
             return foodCoordinate;
         }
 
-        //Method to select position and type of food.
-        public void RenewFood(int x,int y)
+  
+        public List<(int X, int Y)> GetAllEmptyPositions()
         {
+            List<(int X, int Y)> emptyPossitions = new();
+            for (int i = 0; i < board.width; i++)
+            {
+                for (int j = 0; j < board.height; j++)
+                {
+                    if (board.map[i, j] is Tile.Empty)
+                    {
+                        emptyPossitions.Add((i, j));
+                    }
+                }
+            }
+            return emptyPossitions;
+        }
+
+        public void SetFoodInBoard(int x, int y)
+        {
+            board.map[x, y] = Tile.Food;
+        }
+
+
+
+        private void CalculateNexFoodPosition()
+        {
+            var emptyPositions = board.GetAllEmptyPositions();
+            int index = Random.Shared.Next(emptyPositions.Count);
+            (int x, int y) = emptyPositions[index];
             foodCoordinate = new Coordinate(x, y);
-            foodType = SelectRandomFoodType();
+            
+
         }
-        private FoodType SelectRandomFoodType()
+
+        public Food(Board board) 
         {
-            var allFoodTypes = FoodType.GetAllFoodTypes();
-            Random r = new Random();
-            var randomFoodTypeIndex = r.Next(0, allFoodTypes.Length-1);
-            return allFoodTypes[randomFoodTypeIndex];
-        }
-        public Food(int x, int y) 
-        {
-            RenewFood(x, y);
+            this.board = board;
+            CalculateNexFoodPosition();
+
+
         }
 
         

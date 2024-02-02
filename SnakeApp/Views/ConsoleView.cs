@@ -4,10 +4,11 @@ namespace SnakeApp.Views
 {
     public class ConsoleView  // This handles all the console output, like drawing the game board, snake, and food
     {
-        public void Render(Game game)
+        public void Render(Game game, Food food)
         {
-            throw new NotImplementedException();
-            // Implement code to draw the game state on the console
+            Console.SetCursorPosition(food.GetCurrentPosition().X, food.GetCurrentPosition().Y);
+            Console.Write("X");
+        
         }
 
     }
