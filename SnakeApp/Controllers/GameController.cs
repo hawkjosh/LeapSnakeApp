@@ -23,8 +23,7 @@ namespace SnakeApp.Controllers
         public void Start()
         {
             // Implement the game loop here: process input, update game state, render view, etc.
-            InitGame();
-            var cursorPos5 = Console.GetCursorPosition();
+            InitGame();            
             while (true)
             {
                 if (GameState == GameState.InProgress)
@@ -43,15 +42,12 @@ namespace SnakeApp.Controllers
 
         private void StartSnakeGame()
         {
-            var cursorPos4 = Console.GetCursorPosition();
-
             while (!direction.HasValue && GameState == GameState.InProgress)
             {
                 GetDirection();
             }
             while (GameState == GameState.InProgress)
-            {
-                var cursorPos1 = Console.GetCursorPosition();
+            {                
                 if (Console.WindowWidth != gameWidth || Console.WindowHeight != gameHeight)
                 {
                     Console.Clear();
@@ -60,7 +56,7 @@ namespace SnakeApp.Controllers
                     break;
                 }
                 var currentPos = new Coordinate(currentPosition!.X,currentPosition.Y);
-                var cursorPos2 = Console.GetCursorPosition();
+                
                 //Update snake position (coordinates) based on user input
                 if (currentPosition is null || currentPos is null) // JOSH: attempting to fix null reference exception
                 {
@@ -69,8 +65,7 @@ namespace SnakeApp.Controllers
                 else
                 {
                     UpdateSnakePosition(currentPos);
-                }
-                var cursorPos3 = Console.GetCursorPosition();
+                }                
                 if (!CheckIfPositionIsValid(currentPos))
                 {
                     break;
@@ -78,10 +73,10 @@ namespace SnakeApp.Controllers
 
                 //Set Cursor position
                 Console.SetCursorPosition(currentPos.X,currentPos.Y);
-                //var cursorPos = Console.GetCursorPosition();
+                
                 //Console.Write(DirectionChars[(int)direction!]);
                 Console.Write("*");
-                //consoleView.DrawSnake(game.Snake);
+                
 
                 //Save snake's position
                 game.Snake.SnakeQueue.Enqueue(currentPos);
@@ -112,10 +107,8 @@ namespace SnakeApp.Controllers
         {
             var oldPosition = game.Snake.SnakeQueue.Dequeue();
             map[oldPosition.X, oldPosition.Y] = Tile.Empty;
-            Console.SetCursorPosition(oldPosition.X, oldPosition.Y);
-            var currCursorPosition = Console.GetCursorPosition();
-            Console.Write(' ');
-            var currCursorPosition2 = Console.GetCursorPosition();
+            Console.SetCursorPosition(oldPosition.X, oldPosition.Y);            
+            Console.Write(' ');            
         }
 
         private bool CheckIfPositionIsValid(Coordinate currentPosition)
@@ -184,7 +177,6 @@ namespace SnakeApp.Controllers
             //Get the initial position of food
             foodCoordinate = game.Food.GetCurrentPosition();
 
-            var cursorPos2 = Console.GetCursorPosition();
             //Save the initial position of snake and set its tile to snake
             game.Snake.SnakeQueue.Enqueue(currentPosition);
             map[game.Snake.SnakeCoordinate.X, game.Snake.SnakeCoordinate.Y] = Tile.Snake;
@@ -192,12 +184,10 @@ namespace SnakeApp.Controllers
             ////Display the starting position of snake
             //Console.SetCursorPosition(currentPosition.X, currentPosition.Y);
             //Console.Write('*');
-            var cursorPos1 = Console.GetCursorPosition();
+            
             // Render game view
-            consoleView = new ConsoleView();
-            var cursorPos4 = Console.GetCursorPosition();
-            consoleView.Render(game);
-            var cursorPos3 = Console.GetCursorPosition();
+            consoleView = new ConsoleView();            
+            consoleView.Render(game);            
             GameState = GameState.InProgress;
         }
 
