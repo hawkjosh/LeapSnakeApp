@@ -1,6 +1,7 @@
 ﻿
 
 using SnakeApp.Models;
+using SnakeApp.Views;
 
 namespace SnakeApp.Controllers
 {
@@ -171,18 +172,21 @@ namespace SnakeApp.Controllers
             game.Snake.SnakeQueue.Enqueue(game.Snake.SnakeCoordinate);
             map[game.Snake.SnakeCoordinate.X, game.Snake.SnakeCoordinate.Y] = Tile.Snake;
 
-            //Display the starting position of snake
-            Console.SetCursorPosition(currentPosition.X, currentPosition.Y);
-            Console.Write('*');
+            ////Display the starting position of snake
+            //Console.SetCursorPosition(currentPosition.X, currentPosition.Y);
+            //Console.Write('*');
+
+            // Render game view
+            ConsoleView.Render(game);
 
             GameState = GameState.InProgress;
         }
 
         private void UpdateConsoleDimensions()
         {
-            gameWidth = game.Board.Coordinates.X;
-            gameHeight = game.Board.Coordinates.Y;
-            map = new Tile[gameWidth, gameHeight];
+            gameWidth = game.Board.width;
+            gameHeight = game.Board.height;
+            map = game.Board.map;
         }
 
         private void GetUserSpeed()

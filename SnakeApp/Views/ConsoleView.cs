@@ -63,6 +63,8 @@ namespace SnakeApp.Views
         private void DrawSnake(Snake snake) // Method to draw the Snake
         {
             // Logic to draw the snake here
+            var snakePosition = snake.GetCurrentPosition();
+            Console.SetCursorPosition(snakePosition.X, snakePosition.Y);
         }
 
         private void DrawFood(Food food) // Method to draw the food
