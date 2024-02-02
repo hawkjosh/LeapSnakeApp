@@ -46,18 +46,19 @@ namespace SnakeApp.Models
         {
             switch(speed)
             {
-                case 0:
-                    SnakeSpeed = Speed.Slow; break;
                 case 1:
-                    SnakeSpeed = Speed.Medium; break;
+                    SnakeSpeed = Speed.Slow; break;
                 case 2:
+                    SnakeSpeed = Speed.Medium; break;
+                case 3:
                     SnakeSpeed = Speed.Fast; break;
             }
         }
 
         public TimeSpan GetSnakeSleepDuration()
         {
-            int[] snakeVelocityConversionArray = [200, 140, 100];
+            //int[] snakeVelocityConversionArray = [200, 140, 100];
+            int[] snakeVelocityConversionArray = [125, 100, 75];
             var velocity = snakeVelocityConversionArray[(int)SnakeSpeed - 1];
             TimeSpan timeToSleep = TimeSpan.FromMilliseconds(velocity);
             return timeToSleep;

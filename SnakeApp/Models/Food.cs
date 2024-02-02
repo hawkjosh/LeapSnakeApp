@@ -18,9 +18,9 @@ namespace SnakeApp.Models
         public List<(int X, int Y)> GetAllEmptyPositions()
         {
             List<(int X, int Y)> emptyPossitions = new();
-            for (int i = 0; i < board.width; i++)
+            for (int i = 2; i < board.width - 3; i++)
             {
-                for (int j = 0; j < board.height; j++)
+                for (int j = 3; j < board.height - 4; j++)
                 {
                     if (board.map[i, j] is Tile.Empty)
                     {
@@ -43,6 +43,7 @@ namespace SnakeApp.Models
             int index = Random.Shared.Next(emptyPositions.Count);
             (int x, int y) = emptyPositions[index];
             foodCoordinate = new Coordinate(x, y);
+            SetFoodInBoard(x,y);
             return foodCoordinate;
 
 

@@ -21,8 +21,10 @@ namespace SnakeApp.Views
 
         public void Render(Game game)
         {
-            DrawBorder(game.Board); // This error should go away when the board is given parameters in the Game class
+            //DrawBorder(game.Board); // This error should go away when the board is given parameters in the Game class
             //DrawBorder(); // TEMPORARY FOR TESTING
+            
+            DrawBorder(game.Board);
             DrawSnake(game.Snake);
             DrawFood(game.Food);
         }
@@ -31,8 +33,11 @@ namespace SnakeApp.Views
         private void DrawBorder(Board board) // Method to draw border around game board
         //private void DrawBorder() // TEMPORARY FOR TESTING...also need to change each game.Board reference below to board
         {
-            Console.SetCursorPosition(1, 1);
-            for (int x = 0; x < board.width - 1; x++) // Top border
+            Console.SetCursorPosition(0, 0);
+            Console.Write("SNAKE GAME - Score: 0");
+
+            Console.SetCursorPosition(0, 1);
+            for (int x = 0; x < board.width; x++) // Top border
             {
                 if (x % 2 == 0)
                     Console.Write("#");
@@ -40,18 +45,18 @@ namespace SnakeApp.Views
                     Console.Write(" ");
             }
 
-            Console.SetCursorPosition(1, 2);
+            Console.SetCursorPosition(0, 2);
             for (int y = 0; y < board.height - 2; y++) // Left and right borders
             {
                 Console.Write("#");
-                for (int x = 0; x < board.width - 3; x++)
+                for (int x = 0; x < board.width - 2; x++)
                     Console.Write(" ");
                 Console.Write("#");
-                Console.SetCursorPosition(1, y + 2);
+                Console.SetCursorPosition(0, y + 2);
             }
 
-            Console.SetCursorPosition(1, board.height - 1);
-            for (int x = 0; x < board.width - 1; x++) // Bottom border
+            Console.SetCursorPosition(0, board.height - 1);
+            for (int x = 0; x < board.width; x++) // Bottom border
             {
                 if (x % 2 == 0)
                     Console.Write("#");
@@ -60,7 +65,7 @@ namespace SnakeApp.Views
             }
         }
 
-        private void DrawSnake(Snake snake) // Method to draw the Snake
+        public void DrawSnake(Snake snake) // Method to draw the Snake
         {
             // Logic to draw the snake here
             var snakePosition = snake.GetCurrentPosition();
@@ -71,17 +76,25 @@ namespace SnakeApp.Views
                 foreach (var position in snake.SnakeQueue)
                 {
                     Console.SetCursorPosition(position.X, position.Y);
+                    Console.BackgroundColor = ConsoleColor.Green;
                     Console.Write("*");
+                    var cursorPos2 = Console.GetCursorPosition();
+                    
                 }
             }
+            
         }
 
-        private void DrawFood(Food food) // Method to draw the food
+        public void DrawFood(Food food) // Method to draw the food
         {
             // Logic to draw the food here
             var foodPosition = food.GetCurrentPosition();
             Console.SetCursorPosition(foodPosition.X, foodPosition.Y);
+            food.SetFoodInBoard(foodPosition.X, foodPosition.Y);
+            Console.BackgroundColor = ConsoleColor.Red;
             Console.Write("F");
+            Console.BackgroundColor = ConsoleColor.DarkBlue;
+            
         }
 
         //// TEMPORARY FOR TESTING
