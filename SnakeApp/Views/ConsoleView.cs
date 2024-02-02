@@ -28,11 +28,11 @@ namespace SnakeApp.Views
         }
 
         // TODO: Figure out what property will be used to determine the board width and height, use as param for DrawBoardBoarder, currently using full width and height of console window
-        private void DrawBorder(Game game) // Method to draw border around game board
+        private void DrawBorder(Board board) // Method to draw border around game board
         //private void DrawBorder() // TEMPORARY FOR TESTING...also need to change each game.Board reference below to board
         {
             Console.SetCursorPosition(1, 1);
-            for (int x = 0; x < game.Board.Width - 1; x++) // Top border
+            for (int x = 0; x < board.width - 1; x++) // Top border
             {
                 if (x % 2 == 0)
                     Console.Write("#");
@@ -41,17 +41,17 @@ namespace SnakeApp.Views
             }
 
             Console.SetCursorPosition(1, 2);
-            for (int y = 0; y < game.Board.Height - 2; y++) // Left and right borders
+            for (int y = 0; y < board.height - 2; y++) // Left and right borders
             {
                 Console.Write("#");
-                for (int x = 0; x < game.Board.Width - 3; x++)
+                for (int x = 0; x < board.width - 3; x++)
                     Console.Write(" ");
                 Console.Write("#");
                 Console.SetCursorPosition(1, y + 2);
             }
 
-            Console.SetCursorPosition(1, game.Board.Height - 1);
-            for (int x = 0; x < game.Board.Width - 1; x++) // Bottom border
+            Console.SetCursorPosition(1, board.height - 1);
+            for (int x = 0; x < board.width - 1; x++) // Bottom border
             {
                 if (x % 2 == 0)
                     Console.Write("#");
@@ -63,6 +63,10 @@ namespace SnakeApp.Views
         private void DrawSnake(Snake snake) // Method to draw the Snake
         {
             // Logic to draw the snake here
+            var snakePosition = snake.GetCurrentPosition();
+            Console.SetCursorPosition(snakePosition.X, snakePosition.Y);
+            Console.Write("*");
+
         }
 
         private void DrawFood(Food food) // Method to draw the food
