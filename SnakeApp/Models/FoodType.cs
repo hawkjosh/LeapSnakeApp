@@ -24,7 +24,7 @@ namespace SnakeApp.Models
         {
             return [Apple, Pineapple, Grapes, Banana, Strawberry, Chicken];
         }
-
+        //  Console.OutputEncoding = System.Text.Encoding.UTF8; right before you output heart 2
         public static FoodType Apple { get { return new FoodType("A"); } }
         public static FoodType Pineapple { get { return new FoodType("P"); } }
         public static FoodType Grapes { get { return new FoodType("G"); } }
