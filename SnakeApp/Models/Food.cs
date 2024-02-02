@@ -43,6 +43,7 @@ namespace SnakeApp.Models
             int index = Random.Shared.Next(emptyPositions.Count);
             (int x, int y) = emptyPositions[index];
             foodCoordinate = new Coordinate(x, y);
+            SetFoodInBoard(x,y);
             return foodCoordinate;
 
 

@@ -21,10 +21,11 @@ namespace SnakeApp.Views
 
         public void Render(Game game)
         {
-            DrawBorder(game.Board); // This error should go away when the board is given parameters in the Game class
+            //DrawBorder(game.Board); // This error should go away when the board is given parameters in the Game class
             //DrawBorder(); // TEMPORARY FOR TESTING
-            DrawSnake(game.Snake);
+            
             DrawFood(game.Food);
+            DrawSnake(game.Snake);
         }
 
         // TODO: Figure out what property will be used to determine the board width and height, use as param for DrawBoardBoarder, currently using full width and height of console window
@@ -72,16 +73,20 @@ namespace SnakeApp.Views
                 {
                     Console.SetCursorPosition(position.X, position.Y);
                     Console.Write("*");
+                    var cursorPos2 = Console.GetCursorPosition();
                 }
             }
+            var cursorPos1 = Console.GetCursorPosition();
         }
 
-        private void DrawFood(Food food) // Method to draw the food
+        public void DrawFood(Food food) // Method to draw the food
         {
             // Logic to draw the food here
             var foodPosition = food.GetCurrentPosition();
             Console.SetCursorPosition(foodPosition.X, foodPosition.Y);
+            food.SetFoodInBoard(foodPosition.X, foodPosition.Y);
             Console.Write("F");
+            var cursorPos1 = Console.GetCursorPosition();
         }
 
         //// TEMPORARY FOR TESTING
