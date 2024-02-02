@@ -61,7 +61,7 @@ namespace SnakeApp.Views
             }
         }
 
-        private void DrawSnake(Snake snake) // Method to draw the Snake
+        public void DrawSnake(Snake snake) // Method to draw the Snake
         {
             // Logic to draw the snake here
             var snakePosition = snake.GetCurrentPosition();

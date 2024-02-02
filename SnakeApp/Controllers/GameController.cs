@@ -33,7 +33,8 @@ namespace SnakeApp.Controllers
                 }
                 if (GameState == GameState.EndGame)
                 {
-                    Console.WriteLine("Game Over!");
+                    Console.SetCursorPosition(1, 1);
+                    Console.WriteLine($"Game Over!! Your score is {game.Snake.SnakeQueue.Count}!");
                     break;
                 }
 
@@ -74,11 +75,13 @@ namespace SnakeApp.Controllers
                 {
                     break;
                 }
-                
+
                 //Set Cursor position
                 Console.SetCursorPosition(currentPos.X,currentPos.Y);
-                var cursorPos = Console.GetCursorPosition();
-                Console.Write(DirectionChars[(int)direction!]);
+                //var cursorPos = Console.GetCursorPosition();
+                //Console.Write(DirectionChars[(int)direction!]);
+                Console.Write("*");
+                //consoleView.DrawSnake(game.Snake);
 
                 //Save snake's position
                 game.Snake.SnakeQueue.Enqueue(currentPos);
@@ -124,7 +127,7 @@ namespace SnakeApp.Controllers
                 map[currentPosition.X, currentPosition.Y] == Tile.Snake)
             {
                 Console.Clear();
-                Console.WriteLine($"Game Over!! Your score is {game.Snake.SnakeLength}");
+                //Console.WriteLine($"Game Over!! Your score is {game.Snake.SnakeQueue.Count}");
                 GameState = GameState.EndGame;
                 return false;
             }
