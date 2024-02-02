@@ -57,7 +57,14 @@ namespace SnakeApp.Controllers
                 }
 
                 //Update snake position (coordinates) based on user input
-                UpdateSnakePosition(currentPosition);
+                if (currentPosition is null) // JOSH: attempting to fix null reference exception
+                {
+                    throw new System.NullReferenceException("currentPosition is null");
+                }
+                else
+                {
+                    UpdateSnakePosition(currentPosition);
+                }
                 if (!CheckIfPositionIsValid(currentPosition))
                 {
                     break;
@@ -73,7 +80,7 @@ namespace SnakeApp.Controllers
                 if (map[currentPosition.X, currentPosition.Y] == Tile.Food)
                 {
                     //If snake eats food successfully, update food position
-                    foodCoordinate = game.Food.UpdateFoodPosition();
+                    foodCoordinate = game.Food.CalculateNexFoodPosition();
                 }
                 else
                 {
@@ -100,9 +107,10 @@ namespace SnakeApp.Controllers
         private bool CheckIfPositionIsValid(Coordinate currentPosition)
         {
             if (currentPosition.X < 0 || currentPosition.Y < 0 ||
-                currentPosition.X >= game.Board.Coordinates.X ||
-                currentPosition.Y >= game.Board.Coordinates.Y ||
-                map[currentPosition.X, currentPosition.Y] is Tile.Snake)
+                currentPosition.X >= game.Board.width ||
+                currentPosition.Y >= game.Board.height ||
+                //game.Board.map is Tile.Snake) // JOSH: replaced this line with below code to fix syntax error
+                map[currentPosition.X, currentPosition.Y] == Tile.Snake)
             {
                 Console.Clear();
                 Console.WriteLine($"Game Over!! Your score is {game.Snake.SnakeLength}");
@@ -157,7 +165,7 @@ namespace SnakeApp.Controllers
             GetUserSpeed();
 
             //Game model constructs the Snake, Food and Board objects
-            game = new Game(speedInput);
+            //game = new Game(speedInput); // JOSH: moved to constructor
 
             //Get Console Dimensions
             UpdateConsoleDimensions();
@@ -177,7 +185,8 @@ namespace SnakeApp.Controllers
             //Console.Write('*');
 
             // Render game view
-            ConsoleView.Render(game);
+            ConsoleView consoleView = new ConsoleView();
+            consoleView.Render(game);
 
             GameState = GameState.InProgress;
         }
@@ -209,6 +218,11 @@ namespace SnakeApp.Controllers
         public GameController()
         {
             GameState = GameState.WaitingToStart;
+            game = new Game(speedInput); // JOSH: moved from InitGame()
+
+            //game = new Game(); // JOSH: attempting to fix null reference exception
+            map = game.Board.map; // JOSH: attempting to fix null reference exception
+            currentPosition = game.Snake.GetCurrentPosition(); // JOSH: attempting to fix null reference exception
         }
     }
 }
