@@ -72,8 +72,10 @@ namespace SnakeApp.Views
                 foreach (var position in snake.SnakeQueue)
                 {
                     Console.SetCursorPosition(position.X, position.Y);
+                    Console.BackgroundColor = ConsoleColor.Green;
                     Console.Write("*");
                     var cursorPos2 = Console.GetCursorPosition();
+                    
                 }
             }
             var cursorPos1 = Console.GetCursorPosition();

@@ -19,7 +19,7 @@ namespace SnakeApp.Controllers
         ConsoleView consoleView;
         public GameState GameState { get; private set; }
         Tile[,] map;
-        string speedInputQuestion = "Please enter your desired speed (1-->Low, 2-->Medium, 3-->High";
+        string speedInputQuestion = "Please enter your desired speed (1-->Low, 2-->Medium, 3-->High)";
         public void Start()
         {
             // Implement the game loop here: process input, update game state, render view, etc.
@@ -73,8 +73,9 @@ namespace SnakeApp.Controllers
 
                 //Set Cursor position
                 Console.SetCursorPosition(currentPos.X,currentPos.Y);
-                
+
                 //Console.Write(DirectionChars[(int)direction!]);
+                Console.BackgroundColor = ConsoleColor.Green;
                 Console.Write("*");
                 
 
@@ -107,8 +108,10 @@ namespace SnakeApp.Controllers
         {
             var oldPosition = game.Snake.SnakeQueue.Dequeue();
             map[oldPosition.X, oldPosition.Y] = Tile.Empty;
-            Console.SetCursorPosition(oldPosition.X, oldPosition.Y);            
-            Console.Write(' ');            
+            Console.SetCursorPosition(oldPosition.X, oldPosition.Y);
+            Console.BackgroundColor = ConsoleColor.Black;
+            Console.Write(' ');
+
         }
 
         private bool CheckIfPositionIsValid(Coordinate currentPosition)
@@ -231,6 +234,7 @@ namespace SnakeApp.Controllers
             //game = new Game(); // JOSH: attempting to fix null reference exception
             map = game.Board.map; // JOSH: attempting to fix null reference exception
             currentPosition = game.Snake.GetCurrentPosition(); // JOSH: attempting to fix null reference exception
+            consoleView = new ConsoleView();
         }
     }
 }
