@@ -57,7 +57,8 @@ namespace SnakeApp.Models
 
         public TimeSpan GetSnakeSleepDuration()
         {
-            int[] snakeVelocityConversionArray = [200, 140, 100];
+            //int[] snakeVelocityConversionArray = [200, 140, 100];
+            int[] snakeVelocityConversionArray = [125, 100, 75];
             var velocity = snakeVelocityConversionArray[(int)SnakeSpeed - 1];
             TimeSpan timeToSleep = TimeSpan.FromMilliseconds(velocity);
             return timeToSleep;

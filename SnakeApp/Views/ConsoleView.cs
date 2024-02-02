@@ -24,16 +24,20 @@ namespace SnakeApp.Views
             //DrawBorder(game.Board); // This error should go away when the board is given parameters in the Game class
             //DrawBorder(); // TEMPORARY FOR TESTING
             
-            DrawFood(game.Food);
+            DrawBorder(game.Board);
             DrawSnake(game.Snake);
+            DrawFood(game.Food);
         }
 
         // TODO: Figure out what property will be used to determine the board width and height, use as param for DrawBoardBoarder, currently using full width and height of console window
         private void DrawBorder(Board board) // Method to draw border around game board
         //private void DrawBorder() // TEMPORARY FOR TESTING...also need to change each game.Board reference below to board
         {
-            Console.SetCursorPosition(1, 1);
-            for (int x = 0; x < board.width - 1; x++) // Top border
+            Console.SetCursorPosition(0, 0);
+            Console.Write("SNAKE GAME - Score: 0");
+
+            Console.SetCursorPosition(0, 1);
+            for (int x = 0; x < board.width; x++) // Top border
             {
                 if (x % 2 == 0)
                     Console.Write("#");
@@ -41,18 +45,18 @@ namespace SnakeApp.Views
                     Console.Write(" ");
             }
 
-            Console.SetCursorPosition(1, 2);
+            Console.SetCursorPosition(0, 2);
             for (int y = 0; y < board.height - 2; y++) // Left and right borders
             {
                 Console.Write("#");
-                for (int x = 0; x < board.width - 3; x++)
+                for (int x = 0; x < board.width - 2; x++)
                     Console.Write(" ");
                 Console.Write("#");
-                Console.SetCursorPosition(1, y + 2);
+                Console.SetCursorPosition(0, y + 2);
             }
 
-            Console.SetCursorPosition(1, board.height - 1);
-            for (int x = 0; x < board.width - 1; x++) // Bottom border
+            Console.SetCursorPosition(0, board.height - 1);
+            for (int x = 0; x < board.width; x++) // Bottom border
             {
                 if (x % 2 == 0)
                     Console.Write("#");

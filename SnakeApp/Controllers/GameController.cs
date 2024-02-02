@@ -33,7 +33,7 @@ namespace SnakeApp.Controllers
                 if (GameState == GameState.EndGame)
                 {
                     Console.SetCursorPosition(1, 1);
-                    Console.WriteLine($"Game Over!! Your score is {game.Snake.SnakeQueue.Count}!");
+                    Console.WriteLine($"Game Over!! Your score is {game.Snake.SnakeQueue.Count - 1}!");
                     break;
                 }
 
@@ -86,6 +86,9 @@ namespace SnakeApp.Controllers
                 if (map[currentPos.X, currentPos.Y] == Tile.Food)
                 {
                     //If snake eats food successfully, update food position
+                    Console.SetCursorPosition(13, 0);
+                    Console.BackgroundColor = ConsoleColor.DarkBlue;
+                    Console.Write($"Score: {game.Snake.SnakeQueue.Count - 1}");
                     foodCoordinate = game.Food.CalculateNexFoodPosition();
                     consoleView.DrawFood(game.Food);
                 }
