@@ -109,7 +109,7 @@ namespace SnakeApp.Controllers
             var oldPosition = game.Snake.SnakeQueue.Dequeue();
             map[oldPosition.X, oldPosition.Y] = Tile.Empty;
             Console.SetCursorPosition(oldPosition.X, oldPosition.Y);
-            Console.BackgroundColor = ConsoleColor.Black;
+            Console.BackgroundColor = ConsoleColor.DarkBlue;
             Console.Write(' ');
 
         }
@@ -220,6 +220,8 @@ namespace SnakeApp.Controllers
 
         public GameController()
         {
+            Console.BackgroundColor = ConsoleColor.DarkBlue;
+            Console.Clear();
             GameState = GameState.WaitingToStart;
             //Welcome Message
             Console.WriteLine("Welcome to the Game of Snake!");

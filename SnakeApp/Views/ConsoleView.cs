@@ -87,7 +87,9 @@ namespace SnakeApp.Views
             var foodPosition = food.GetCurrentPosition();
             Console.SetCursorPosition(foodPosition.X, foodPosition.Y);
             food.SetFoodInBoard(foodPosition.X, foodPosition.Y);
+            Console.BackgroundColor = ConsoleColor.Red;
             Console.Write("F");
+            Console.BackgroundColor = ConsoleColor.DarkBlue;
             var cursorPos1 = Console.GetCursorPosition();
         }
 
