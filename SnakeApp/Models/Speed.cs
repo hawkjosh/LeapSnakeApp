@@ -8,7 +8,7 @@ namespace SnakeApp.Models
 {
     public enum Speed
     {
-        Slow = 1, // JOSH: changed to 1-based index
+        Slow = 1,
         Medium = 2,
         Fast = 3
     }

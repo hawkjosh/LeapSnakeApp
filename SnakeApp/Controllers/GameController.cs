@@ -58,7 +58,7 @@ namespace SnakeApp.Controllers
                 var currentPos = new Coordinate(currentPosition!.X,currentPosition.Y);
                 
                 //Update snake position (coordinates) based on user input
-                if (currentPosition is null || currentPos is null) // JOSH: attempting to fix null reference exception
+                if (currentPosition is null || currentPos is null)
                 {
                     throw new System.NullReferenceException("currentPosition is null");
                 }
@@ -74,9 +74,8 @@ namespace SnakeApp.Controllers
                 //Set Cursor position
                 Console.SetCursorPosition(currentPos.X,currentPos.Y);
 
-                //Console.Write(DirectionChars[(int)direction!]);
                 Console.BackgroundColor = ConsoleColor.Green;
-                Console.Write("*");
+                Console.Write("S");
                 
 
                 //Save snake's position
@@ -122,11 +121,9 @@ namespace SnakeApp.Controllers
             if (currentPosition.X < 1 || currentPosition.Y < 2 ||
                 currentPosition.X > game.Board.width-2 ||
                 currentPosition.Y > game.Board.height-2 ||
-                //game.Board.map is Tile.Snake) // JOSH: replaced this line with below code to fix syntax error
                 map[currentPosition.X, currentPosition.Y] == Tile.Snake)
             {
                 Console.Clear();
-                //Console.WriteLine($"Game Over!! Your score is {game.Snake.SnakeQueue.Count}");
                 GameState = GameState.EndGame;
                 return false;
             }
@@ -171,9 +168,6 @@ namespace SnakeApp.Controllers
         {
             
 
-            //Game model constructs the Snake, Food and Board objects
-            //game = new Game(speedInput); // JOSH: moved to constructor
-
             //Get Console Dimensions
             UpdateConsoleDimensions();
             
@@ -187,10 +181,6 @@ namespace SnakeApp.Controllers
             game.Snake.SnakeQueue.Enqueue(currentPosition);
             map[game.Snake.SnakeCoordinate.X, game.Snake.SnakeCoordinate.Y] = Tile.Snake;
 
-            ////Display the starting position of snake
-            //Console.SetCursorPosition(currentPosition.X, currentPosition.Y);
-            //Console.Write('*');
-            
             // Render game view
             consoleView = new ConsoleView();            
             consoleView.Render(game);            
@@ -234,11 +224,10 @@ namespace SnakeApp.Controllers
             Console.WriteLine(speedInputQuestion);
             GetUserSpeed();
 
-            game = new Game(speedInput); // JOSH: moved from InitGame()
+            game = new Game(speedInput);
 
-            //game = new Game(); // JOSH: attempting to fix null reference exception
-            map = game.Board.map; // JOSH: attempting to fix null reference exception
-            currentPosition = game.Snake.GetCurrentPosition(); // JOSH: attempting to fix null reference exception
+            map = game.Board.map;
+            currentPosition = game.Snake.GetCurrentPosition();
             consoleView = new ConsoleView();
         }
     }

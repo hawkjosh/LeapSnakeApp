@@ -16,6 +16,5 @@
             Food = new Food(Board);
         }
 
-        // Add methods for game logic such as starting, updating state, checking for game over, etc.
     }
 }

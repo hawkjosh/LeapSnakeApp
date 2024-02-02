@@ -4,7 +4,6 @@ namespace SnakeApp.Models
 {
     public class Snake  : ICurrentPosition // This handles the snake's attributes like length, position, movement, etc.
     {
-        // TODO: Add properties and methods to manage the snake
         private Speed snakespeed;
         private Direction snakeDirection;
        
@@ -57,7 +56,6 @@ namespace SnakeApp.Models
 
         public TimeSpan GetSnakeSleepDuration()
         {
-            //int[] snakeVelocityConversionArray = [200, 140, 100];
             int[] snakeVelocityConversionArray = [125, 100, 75];
             var velocity = snakeVelocityConversionArray[(int)SnakeSpeed - 1];
             TimeSpan timeToSleep = TimeSpan.FromMilliseconds(velocity);

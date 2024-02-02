@@ -4,7 +4,6 @@ namespace SnakeApp.Models
 {
     public class Food : ICurrentPosition  // This manages the position and type of food items on the board
     {
-        // TODO: Add properties and methods
         private Coordinate foodCoordinate;
         private Board board;
 
@@ -37,7 +36,7 @@ namespace SnakeApp.Models
         }
 
 
-        public Coordinate CalculateNexFoodPosition() // JOSH: changed to public so it can be called from GameController
+        public Coordinate CalculateNexFoodPosition()
         {
             var emptyPositions = GetAllEmptyPositions();
             int index = Random.Shared.Next(emptyPositions.Count);
