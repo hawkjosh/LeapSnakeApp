@@ -65,6 +65,8 @@ namespace SnakeApp.Views
             // Logic to draw the snake here
             var snakePosition = snake.GetCurrentPosition();
             Console.SetCursorPosition(snakePosition.X, snakePosition.Y);
+            Console.Write("*");
+
         }
 
         private void DrawFood(Food food) // Method to draw the food
