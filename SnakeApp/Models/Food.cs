@@ -37,8 +37,7 @@ namespace SnakeApp.Models
         }
 
 
-
-        private Coordinate CalculateNexFoodPosition()
+        public Coordinate CalculateNexFoodPosition() // JOSH: changed to public so it can be called from GameController
         {
             var emptyPositions = GetAllEmptyPositions();
             int index = Random.Shared.Next(emptyPositions.Count);

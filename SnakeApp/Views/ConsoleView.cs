@@ -65,13 +65,23 @@ namespace SnakeApp.Views
             // Logic to draw the snake here
             var snakePosition = snake.GetCurrentPosition();
             Console.SetCursorPosition(snakePosition.X, snakePosition.Y);
-            Console.Write("*");
-
+            //Console.Write("*");
+            if (snake.SnakeQueue.Count > 0)
+            {
+                foreach (var position in snake.SnakeQueue)
+                {
+                    Console.SetCursorPosition(position.X, position.Y);
+                    Console.Write("*");
+                }
+            }
         }
 
         private void DrawFood(Food food) // Method to draw the food
         {
             // Logic to draw the food here
+            var foodPosition = food.GetCurrentPosition();
+            Console.SetCursorPosition(foodPosition.X, foodPosition.Y);
+            Console.Write("F");
         }
 
         //// TEMPORARY FOR TESTING

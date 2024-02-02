@@ -10,7 +10,7 @@ namespace SnakeApp
             var gm = new GameController();
             gm.Start();
 
-
+            Console.ReadKey();
         }
     }
 }
