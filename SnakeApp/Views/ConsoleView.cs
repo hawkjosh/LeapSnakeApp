@@ -78,7 +78,7 @@ namespace SnakeApp.Views
                     
                 }
             }
-            var cursorPos1 = Console.GetCursorPosition();
+            
         }
 
         public void DrawFood(Food food) // Method to draw the food
@@ -90,7 +90,7 @@ namespace SnakeApp.Views
             Console.BackgroundColor = ConsoleColor.Red;
             Console.Write("F");
             Console.BackgroundColor = ConsoleColor.DarkBlue;
-            var cursorPos1 = Console.GetCursorPosition();
+            
         }
 
         //// TEMPORARY FOR TESTING

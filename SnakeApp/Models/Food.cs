@@ -18,9 +18,9 @@ namespace SnakeApp.Models
         public List<(int X, int Y)> GetAllEmptyPositions()
         {
             List<(int X, int Y)> emptyPossitions = new();
-            for (int i = 0; i < board.width; i++)
+            for (int i = 2; i < board.width-2; i++)
             {
-                for (int j = 0; j < board.height; j++)
+                for (int j = 1; j < board.height-2; j++)
                 {
                     if (board.map[i, j] is Tile.Empty)
                     {

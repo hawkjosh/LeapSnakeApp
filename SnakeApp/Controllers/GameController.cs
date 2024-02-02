@@ -116,9 +116,9 @@ namespace SnakeApp.Controllers
 
         private bool CheckIfPositionIsValid(Coordinate currentPosition)
         {
-            if (currentPosition.X < 0 || currentPosition.Y < 0 ||
-                currentPosition.X >= game.Board.width ||
-                currentPosition.Y >= game.Board.height ||
+            if (currentPosition.X < 1 || currentPosition.Y < 2 ||
+                currentPosition.X > game.Board.width-2 ||
+                currentPosition.Y > game.Board.height-2 ||
                 //game.Board.map is Tile.Snake) // JOSH: replaced this line with below code to fix syntax error
                 map[currentPosition.X, currentPosition.Y] == Tile.Snake)
             {
